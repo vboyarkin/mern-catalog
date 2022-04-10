@@ -1,23 +1,23 @@
-FROM node
+# stage 1
+
+FROM node as client-build
+COPY ./client /home/client
+WORKDIR /home/client
+RUN rm -rf node_modules && npm install && npm run build
+
+# stage 2
+
+FROM node as production
 
 WORKDIR /home/node/app
 
-COPY models models/
-COPY routes routes/
-COPY package.json .
-COPY ecosystem.config.js .
-COPY app.js .
+COPY ./server/models models/
+COPY ./server/routes routes/
+COPY ./server/package.json .
+COPY ./server/app.js .
 
-COPY ../frontend/build /frontend/build
-
-ENV BACKEND_PORT: 3355
-ENV DEBUG: "catalog:*"
-ENV MONGO_USERNAME: root
-ENV MONGO_PASSWORD: test
+COPY --from=client-build /home/client/build /home/client/build
 
 RUN npm install
 
-EXPOSE 3000
-EXPOSE 3355
-
-CMD ["npm" , "start"]
+CMD ["npm", "start"]

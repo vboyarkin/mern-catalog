@@ -22,8 +22,15 @@ services:
 
   catalog-backend:
     build:
-      context: ./backend
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: ./server/Dockerfile
+    environment:
+      - BACKEND_PORT=3355
+      - DEBUG="catalog:*"
+      - MONGO_USERNAME=root
+      - MONGO_PASSWORD=test
+    ports:
+      - "3355:3355"
     container_name: catalog-backend
     depends_on:
       - catalog-mongo

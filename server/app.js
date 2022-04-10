@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cors({ origin: "*", maxAge: 120, methods: "GET" }));
 
-app.use(express.static(path.join("frontend/build")));
+app.use(express.static(path.join("/home/client/build")));
 
 app.use(routes);
 
