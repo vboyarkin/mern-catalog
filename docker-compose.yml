@@ -1,0 +1,40 @@
+version: "3.1"
+
+services:
+  catalog-mongo:
+    image: mongo
+    container_name: catalog-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo-vol:/data/db
+      - type: bind
+        source: ./mongodb/db-init
+        target: /data/db-init
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: test
+    logging:
+      driver: none
+    networks:
+      - catalog
+    ports:
+      - 27017:27017
+
+  catalog-backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    container_name: catalog-backend
+    depends_on:
+      - catalog-mongo
+    networks:
+      - catalog
+    restart: unless-stopped
+
+networks:
+  catalog:
+    driver: bridge
+
+volumes:
+  mongo-vol:
+
