@@ -1,0 +1,65 @@
+@import "../assets/_variables.sass"
+
+.itemCard
+  display: flex
+  flex-direction: column
+
+  margin: 20px 44px
+  width: 200px
+  height: 330px
+
+  > *
+    flex: 1
+
+  .imageContainer
+    flex: 9999
+
+.imageContainer
+  display: flex
+  align-items: center
+
+.image
+  max-height: 100px
+  max-width: 100px
+  margin: 10px auto
+
+span, svg
+  display: block
+
+svg
+  height: 15px
+  width: 15px
+  path
+    fill: $color-inactive
+  path.active
+    fill: $color-active
+
+.rating
+  font-size: 0.9rem
+
+  display: flex
+  align-items: center
+  > *
+    margin-right: 5px
+  .ratingRate
+    color: $color-active
+  .ratingCount
+    color: $color-inactive
+
+.price
+  font-size: 1.3rem
+  margin: 5px 0px 10px 0px
+
+.title
+  margin: 3px 0px 18px 0px
+
+button
+  color: white
+  background: $color-active
+  border: none
+  border-radius: 3px
+  padding: 8px 0px
+  margin: 0px
+  font-family: inherit
+  cursor: pointer
+  @include animation-bg

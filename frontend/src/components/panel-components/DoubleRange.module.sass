@@ -1,0 +1,87 @@
+@import "../../assets/_variables.sass"
+
+$thumb-diameter: 1em
+$color-thumb-bg: white
+$input-color: #000
+$input-text-width: 6em
+
+@mixin track()
+  background: none
+
+@mixin thumb()
+  border: solid 1px $color-active
+  border-radius: 50%
+  width: $thumb-diameter
+  height: $thumb-diameter
+  background: $color-thumb-bg
+  pointer-events: auto
+  cursor: pointer
+
+.rangeContainer
+  display: grid
+  margin: 1em 0em
+  background: linear-gradient(0deg, transparent 0 45%, $color-inactive 45% 55%, transparent 55%)
+  z-index: 2
+
+  // active interval line
+  &::after
+    content: ''
+    background: linear-gradient(0deg, transparent 0 45%, $color-active 45% 55%, transparent 55%)
+    grid-column: 1
+    grid-row: 2
+    z-index: 2
+    width: var(--interval-width)
+    margin-left: var(--active-interval-offset)
+
+input[type="range"]
+  color: $input-color
+  font: inherit
+  grid-column: 1
+  grid-row: 2
+  background: none
+  margin: 0
+  font: inherit
+  color: $input-color
+  pointer-events: none
+  z-index: 3
+
+  &::-webkit-slider-runnable-track,
+  &::-webkit-slider-thumb,
+  &
+    -webkit-appearance: none
+
+  &::-webkit-slider-runnable-track
+    @include track
+  &::-moz-range-track
+    @include track
+
+  &::-webkit-slider-thumb
+    @include thumb
+  &::-moz-range-thumb
+    @include thumb
+
+input[type="number"]
+  border: solid 1px $color-inactive
+  border-radius: 4px
+  padding: 1rem 1.2rem
+  font-size: inherit
+  width: 1px
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+  -webkit-appearance: none
+  margin: 0
+
+input[type=number]
+  -moz-appearance: textfield
+
+.textContainer
+  display: flex
+  align-items: center
+  input
+    flex-grow: 1
+
+span.dash
+  margin: 5px
+  color: $color-inactive
+  flex

@@ -1,0 +1,28 @@
+$main-font: Roboto, Avenir, Helvetica, Arial, sans-serif
+
+$color-active: #e83e5a
+$color-inactive: #e7e7e9
+$bg-hover: #bd0f2c
+$shadow: 2px 2px 19px rgba(0, 0, 0, 0.11)
+
+@mixin animation-bg($new-bg: $bg-hover, $state: hover)
+  transition: background .15s ease-in-out
+  &:#{$state}
+    background: $new-bg
+
+@mixin animation-color-cnahge($new-color: $bg-hover, $state: hover)
+  transition: color .15s ease-in-out
+  &:#{$state}
+    color: $new-color
+
+@mixin animation-pulse
+  animation: pulse 1s linear infinite
+
+@keyframes pulse
+  from
+    opacity: 100%
+  to
+    opacity: 1000%
+
+  50%
+    opacity: 25%

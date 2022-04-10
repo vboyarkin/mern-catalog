@@ -1,0 +1,25 @@
+@import "../../assets/_variables.sass"
+
+div.textField
+  position: relative
+
+  input
+    border: solid 1px $color-inactive
+    border-radius: 4px
+    padding: 1rem 1.2rem
+    margin-bottom: .8rem
+    font-size: inherit
+    width: 100%
+    box-sizing: border-box
+    flex-grow: 1
+
+  button
+    background: none
+    border: none
+    position: absolute
+    right: 3px
+    top: 25%
+    cursor: pointer
+    color: $color-inactive
+    padding: 0 8px 0 0
+    @include animation-color-cnahge($color-active)
