@@ -2,14 +2,16 @@ version: "3.1"
 
 services:
   catalog-mongo:
-    image: mongo
+    build:
+      context: ./mongodb
+      dockerfile: ./Dockerfile
     container_name: catalog-mongo
     restart: unless-stopped
     volumes:
       - mongo-vol:/data/db
-      - type: bind
-        source: ./mongodb/db-init
-        target: /data/db-init
+      # - type: bind
+      #   source: ./mongodb/db-init
+      #   target: /data/db-init
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: test

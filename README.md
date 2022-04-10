@@ -17,3 +17,10 @@ Then go to mongodb and check out README.md
 ```
 docker compose build --no-cache
 ```
+
+## Export data from mongo
+
+```
+docker exec -i catalog-mongo /usr/bin/mongodump -u root --password test --authenticationDatabase admin --db catalog --out /dump
+docker cp catalog-mongo:/dump ./mongodb/dump
+```
