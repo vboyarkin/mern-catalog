@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "MONGO_URI=mongodb://$MONGO_USERNAME:$MONGO_PASSWORD@catalog-mongo:27017/catalog node --experimental-modules app.js"
+    "start": "MONGO_URI=mongodb://catalog-mongo:27017/catalog node --experimental-modules app.js"
   },
   "type": "module",
   "author": "vboyarkin <boyarkinvladislavv@gmail.com>",

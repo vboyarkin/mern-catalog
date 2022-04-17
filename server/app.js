@@ -1,10 +1,6 @@
 import path from "path";
 import logger from "morgan";
 import DBG from "debug";
-const log = DBG("catalog:service");
-const error = DBG("catalog:error");
-console.log = log;
-console.error = error;
 
 import express from "express";
 import mongoose from "mongoose";
@@ -24,7 +20,13 @@ app.use(express.static(path.join("/home/client/build")));
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGO_URI + "?authSource=admin&w=1");
+mongoose.connect(process.env.MONGO_URI, {
+  authSource: "admin",
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  user: process.env.MONGO_USERNAME,
+  pass: process.env.MONGO_PASSWORD,
+});
 
 import Item from "./models/item.js";
 
