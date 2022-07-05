@@ -20,7 +20,7 @@ export default function RadioListSelector({
             name={children}
             onChange={(e) => onChange(e.target.value)}
           />
-          <label htmlFor="'radio' + item.id">{item.option}</label>
+          <label htmlFor={"radio" + item.id}>{item.option}</label>
         </div>
       ))}
     </div>
