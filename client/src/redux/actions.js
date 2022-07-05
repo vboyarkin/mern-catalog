@@ -1,4 +1,4 @@
-import { API_URL, getQueryForArray, wrapInTimeout } from "../assets/utils";
+import { getQueryForArray, wrapInTimeout } from "../assets/utils";
 import {
   HIDE_FILTERS_LOADER,
   HIDE_PRODUCTS_LOADER,
@@ -30,7 +30,7 @@ export const fetchProducts = (page = 1) => {
       );
 
       const query = {
-        category: categories.map(x => x.option),
+        category: categories.map((x) => x.option),
         discount: appliedFilters.discount || "",
         minPrice: appliedFilters.price.min || "",
         maxPrice: appliedFilters.price.max || "",
@@ -46,10 +46,12 @@ export const fetchProducts = (page = 1) => {
         "page=" + query.page,
         "limit=" + query.limit,
       ]
-        .filter(x => x)
+        .filter((x) => x)
         .join("&");
 
-      const res = await fetch(API_URL + "products?" + params);
+      const res = await fetch(
+        process.env.REACT_APP_API_URL + "products?" + params
+      );
       const json = await res.json();
 
       if (json.length === 0) dispatch(updateCanLoadMoreProducts(false));
@@ -70,7 +72,7 @@ export const fetchFilters = () => {
     try {
       dispatch(showFiltersLoader());
 
-      const res = await fetch(API_URL + "filters");
+      const res = await fetch(process.env.REACT_APP_API_URL + "filters");
       const json = await res.json();
 
       wrapInTimeout(() => {
@@ -85,11 +87,11 @@ export const fetchFilters = () => {
   };
 };
 
-export const updateFilters = filters => ({
+export const updateFilters = (filters) => ({
   type: UPDATE_FILTERS,
   payload: filters,
 });
-export const updateProducts = products => ({
+export const updateProducts = (products) => ({
   type: UPDATE_PRODUCTS,
   payload: products,
 });
@@ -97,7 +99,7 @@ export const addProductsPage = (products, pagesLoaded) => ({
   type: ADD_PRODUCTS_PAGE,
   payload: { products, pagesLoaded },
 });
-export const applyFilters = filters => ({
+export const applyFilters = (filters) => ({
   type: APPLY_FILTERS,
   payload: filters,
 });
@@ -118,7 +120,7 @@ export const hideProductsLoader = () => ({
   type: HIDE_PRODUCTS_LOADER,
 });
 
-export const updateCanLoadMoreProducts = canLoadMoreProducts => ({
+export const updateCanLoadMoreProducts = (canLoadMoreProducts) => ({
   type: UPDATE_CAN_LOAD_MORE_PRODUCTS,
   payload: canLoadMoreProducts,
 });

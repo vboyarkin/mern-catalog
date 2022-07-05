@@ -26,6 +26,8 @@ services:
       - DEBUG="catalog:*"
       - MONGO_USERNAME=root
       - MONGO_PASSWORD=test
+      - REACT_APP_IS_DEV=true
+      - REACT_APP_API_URL=http://localhost:3355/api/
     ports:
       - "3355:3355"
     container_name: catalog-backend
@@ -38,4 +40,3 @@ services:
 networks:
   catalog:
     driver: bridge
-
