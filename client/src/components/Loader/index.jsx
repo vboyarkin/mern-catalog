@@ -1,5 +1,5 @@
 import React from "react";
-import TextFiller from "./TextFiller";
+import TextFiller from "../TextFiller";
 import classes from "./Loader.module.sass";
 
 /**
@@ -13,4 +13,3 @@ export default function Loader({ text = "Загрузка...", size = "small" })
     </div>
   );
 }
-

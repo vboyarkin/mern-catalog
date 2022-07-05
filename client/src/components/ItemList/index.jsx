@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { fetchProducts, loadNextPage } from "../redux/actions";
-import ItemCard from "./ItemCard";
+import { fetchProducts, loadNextPage } from "../../redux/actions";
+import ItemCard from "../ItemCard";
 import classes from "./ItemList.module.sass";
-import Loader from "./Loader";
-import TextFiller from "./TextFiller";
+import Loader from "../Loader";
+import TextFiller from "../TextFiller";
 
 function ItemList({
   isLoadingProducts,
@@ -33,9 +33,10 @@ function ItemList({
     observerRef.current = new IntersectionObserver(callback);
     observerRef.current.observe(infinityScrollTrigger.current);
   }, [isLoadingProducts]);
+
   return (
     <div className={classes.itemList}>
-      {products.map(item => (
+      {products.map((item) => (
         <ItemCard item={item} key={item.id} />
       ))}
       <div
@@ -52,7 +53,7 @@ function ItemList({
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoadingProducts: state.catalog.isLoadingProducts,
   products: state.catalog.products,
   canLoadMoreProducts: state.catalog.canLoadMoreProducts,

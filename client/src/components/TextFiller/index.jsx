@@ -17,4 +17,3 @@ export default function Loader({ text = "", size = "small" }) {
     </div>
   );
 }
-

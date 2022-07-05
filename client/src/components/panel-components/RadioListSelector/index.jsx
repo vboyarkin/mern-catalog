@@ -10,7 +10,7 @@ export default function RadioListSelector({
   return (
     <div className={classes.radioContaier}>
       <h4>{children}</h4>
-      {items.map(item => (
+      {items.map((item) => (
         <div className="list-wrap" key={item.id}>
           <input
             type="radio"
@@ -18,7 +18,7 @@ export default function RadioListSelector({
             checked={value !== null && item.option === Number(value)}
             id={"radio" + item.id}
             name={children}
-            onChange={e => onChange(e.target.value)}
+            onChange={(e) => onChange(e.target.value)}
           />
           <label htmlFor="'radio' + item.id">{item.option}</label>
         </div>

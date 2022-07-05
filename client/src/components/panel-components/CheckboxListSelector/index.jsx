@@ -1,5 +1,5 @@
 import classes from "./CheckboxListSelector.module.sass";
-import TextField from "./TextField";
+import TextField from "../TextField";
 
 import React, { useState } from "react";
 
@@ -26,10 +26,11 @@ export default function CheckboxListSelector({
   const [textFilter, setTextFilter] = useState("");
 
   const filteredItems = () => {
-    return options.filter(x =>
+    return options.filter((x) =>
       x.option.toLowerCase().includes(textFilter.toLowerCase().trim())
     );
   };
+
   function onTextFieldValueChange(e) {
     setTextFilter(e.target.value);
   }
@@ -54,7 +55,7 @@ export default function CheckboxListSelector({
             id={"checkbox" + item.id}
             value={checkedOptions[i]}
             checked={checkedOptions[i]}
-            onChange={e => checkItem(i)}
+            onChange={(e) => checkItem(i)}
           />
           <label htmlFor={"checkbox" + item.id}>{item.option}</label>
         </div>

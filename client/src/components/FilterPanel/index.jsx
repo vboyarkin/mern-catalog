@@ -5,13 +5,13 @@ import {
   fetchFilters,
   fetchProducts,
   resetFilters,
-} from "../redux/actions";
-import RadioListSelector from "./panel-components/RadioListSelector";
-import RangeSelector from "./panel-components/RangeSelector";
-import CheckboxListSelector from "./panel-components/CheckboxListSelector";
+} from "../../redux/actions";
+import RadioListSelector from "../panel-components/RadioListSelector";
+import RangeSelector from "../panel-components/RangeSelector";
+import CheckboxListSelector from "../panel-components/CheckboxListSelector";
 import classes from "./FilterPanel.module.sass";
 import "./FilterPanel.sass";
-import Loader from "./Loader";
+import Loader from "../Loader";
 
 function FilterPanel({
   isLoadingFilters,
@@ -26,7 +26,7 @@ function FilterPanel({
     fetchFilters();
   }, []);
 
-  const onCategorySelectionChange = newCheckedCategories => {
+  const onCategorySelectionChange = (newCheckedCategories) => {
     const newAppliedFilters = {
       ...appliedFilters,
       checkedCategories: newCheckedCategories,
@@ -34,14 +34,16 @@ function FilterPanel({
 
     applyFilters(newAppliedFilters);
   };
-  const onPriceRangeSelectionChange = newPriceRange => {
+
+  const onPriceRangeSelectionChange = (newPriceRange) => {
     const newAppliedFilters = {
       ...appliedFilters,
       price: newPriceRange,
     };
     applyFilters(newAppliedFilters);
   };
-  const onDiscountChange = newDiscount => {
+
+  const onDiscountChange = (newDiscount) => {
     const newAppliedFilters = {
       ...appliedFilters,
       discount: newDiscount,
@@ -49,10 +51,11 @@ function FilterPanel({
     applyFilters(newAppliedFilters);
   };
 
-  const onApplyClick = e => {
+  const onApplyClick = (e) => {
     fetchProducts();
   };
-  const onResetClick = e => {
+
+  const onResetClick = (e) => {
     resetFilters();
   };
 
@@ -96,7 +99,7 @@ function FilterPanel({
     );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filters: state.catalog.filters,
   appliedFilters: state.catalog.appliedFilters,
   isLoadingFilters: state.catalog.isLoadingFilters,

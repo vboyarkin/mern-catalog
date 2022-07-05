@@ -14,6 +14,7 @@ export default function DoubleRange({
 
     return { min, max };
   };
+
   const sanitizeNumber = (val, isHarsh = false) => {
     const newVal = Math.round(Number(val) * 100) / 100;
 
@@ -40,6 +41,7 @@ export default function DoubleRange({
 
     onRangeChange({ min: left, max: right });
   };
+
   const onRightValueChange = (e, isChangedBySlider) => {
     const newVal = sanitizeNumber(e.target.value);
 
@@ -54,7 +56,7 @@ export default function DoubleRange({
     onRangeChange({ min: left, max: right });
   };
 
-  const onInputFocusOut = e => {
+  const onInputFocusOut = (e) => {
     e.target.value = sanitizeNumber(e.target.value, true);
   };
 
@@ -63,6 +65,7 @@ export default function DoubleRange({
       document.documentElement.style.setProperty(variable, value);
     }
   };
+
   const cssVars = (leftValue, rightValue) => {
     const left = sanitizeNumber(leftValue, true);
     const right = sanitizeNumber(rightValue, true);
@@ -106,14 +109,14 @@ export default function DoubleRange({
             min={minValue}
             max={maxValue}
             value={getValues().min}
-            onChange={e => onLeftValueChange(e, true)}
+            onChange={(e) => onLeftValueChange(e, true)}
           />
           <input
             type="range"
             min={minValue}
             max={maxValue}
             value={getValues().max}
-            onChange={e => onRightValueChange(e, true)}
+            onChange={(e) => onRightValueChange(e, true)}
           />
         </div>
       </div>
