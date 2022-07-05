@@ -39,19 +39,21 @@ export const fetchProducts = (page = 1) => {
       };
 
       let params = [
-        getQueryForArray(query.category, "category"),
-        "minPrice=" + query.minPrice,
-        "maxPrice=" + query.maxPrice,
-        "discount=" + query.discount,
-        "page=" + query.page,
-        "limit=" + query.limit,
+        ...query.category.map((x) => ["category", x]),
+        ["minPrice", query.minPrice],
+        ["maxPrice", query.maxPrice],
+        ["discount", query.discount],
+        ["page", query.page],
+        ["limit", query.limit],
       ]
-        .filter((x) => x)
+        .filter((x) => x[1])
+        .map((x) => `${x[0]}=${x[1]}`)
         .join("&");
 
       const res = await fetch(
         process.env.REACT_APP_API_URL + "products?" + params
       );
+
       const json = await res.json();
 
       if (json.length === 0) dispatch(updateCanLoadMoreProducts(false));
