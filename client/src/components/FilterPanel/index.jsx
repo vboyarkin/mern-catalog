@@ -81,7 +81,6 @@ function FilterPanel({
         </RangeSelector>
 
         <RadioListSelector
-          propertyName="discount"
           items={filters.discount}
           value={appliedFilters.discount}
           onChange={onDiscountChange}

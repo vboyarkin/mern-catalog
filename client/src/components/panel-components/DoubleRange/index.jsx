@@ -28,29 +28,26 @@ export default function DoubleRange({
     updateHighlightedInterval(getValues().min, getValues().max);
   }, [values]);
 
-  const onLeftValueChange = (e, isChangedBySlider) => {
-    const newVal = sanitizeNumber(e.target.value);
-
-    let left = newVal;
-    let right = values.max || maxValue;
-
-    if (newVal > right) {
-      if (isChangedBySlider) left = right;
-      right = newVal;
-    }
-
-    onRangeChange({ min: left, max: right });
-  };
-
-  const onRightValueChange = (e, isChangedBySlider) => {
+  const onValueChange = (e, isChangedBySlider, isLeftChange) => {
     const newVal = sanitizeNumber(e.target.value);
 
     let left = values.min || minValue;
-    let right = newVal;
+    let right = values.max || maxValue;
 
-    if (newVal < left) {
-      if (isChangedBySlider) right = left;
+    if (isLeftChange) {
       left = newVal;
+
+      if (newVal > right) {
+        if (isChangedBySlider) left = right;
+        right = newVal;
+      }
+    } else {
+      right = newVal;
+
+      if (newVal < left) {
+        if (isChangedBySlider) right = left;
+        left = newVal;
+      }
     }
 
     onRangeChange({ min: left, max: right });
@@ -89,7 +86,7 @@ export default function DoubleRange({
           type="number"
           placeholder={minValue}
           value={getValues().min}
-          onChange={onLeftValueChange}
+          onChange={(e) => onValueChange(e, false, true)}
           onBlur={onInputFocusOut}
         />
         <span className={classes.dash}>—</span>
@@ -97,7 +94,7 @@ export default function DoubleRange({
           type="number"
           placeholder={maxValue}
           value={getValues().max}
-          onChange={onRightValueChange}
+          onChange={(e) => onValueChange(e, false, false)}
           onBlur={onInputFocusOut}
         />
       </div>
@@ -109,14 +106,14 @@ export default function DoubleRange({
             min={minValue}
             max={maxValue}
             value={getValues().min}
-            onChange={(e) => onLeftValueChange(e, true)}
+            onChange={(e) => onValueChange(e, true, true)}
           />
           <input
             type="range"
             min={minValue}
             max={maxValue}
             value={getValues().max}
-            onChange={(e) => onRightValueChange(e, true)}
+            onChange={(e) => onValueChange(e, true, false)}
           />
         </div>
       </div>
