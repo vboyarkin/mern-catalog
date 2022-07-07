@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useDebouncedCallback } from "../../../hooks/useDebounce";
 import classes from "./DoubleRange.module.sass";
 
 export default function DoubleRange({
@@ -28,8 +29,8 @@ export default function DoubleRange({
     updateHighlightedInterval(getValues().min, getValues().max);
   }, [values]);
 
-  const onValueChange = (e, isChangedBySlider, isLeftChange) => {
-    const newVal = sanitizeNumber(e.target.value);
+  const onValueChange = (value, isChangedBySlider, isLeftChange) => {
+    const newVal = sanitizeNumber(value);
 
     let left = values.min || minValue;
     let right = values.max || maxValue;
@@ -52,6 +53,8 @@ export default function DoubleRange({
 
     onRangeChange({ min: left, max: right });
   };
+
+  const onValueChangeDebounced = useDebouncedCallback(onValueChange, 50);
 
   const onInputFocusOut = (e) => {
     e.target.value = sanitizeNumber(e.target.value, true);
@@ -86,7 +89,7 @@ export default function DoubleRange({
           type="number"
           placeholder={minValue}
           value={getValues().min}
-          onChange={(e) => onValueChange(e, false, true)}
+          onChange={(e) => onValueChangeDebounced(e.target.value, false, true)}
           onBlur={onInputFocusOut}
         />
         <span className={classes.dash}>—</span>
@@ -94,7 +97,7 @@ export default function DoubleRange({
           type="number"
           placeholder={maxValue}
           value={getValues().max}
-          onChange={(e) => onValueChange(e, false, false)}
+          onChange={(e) => onValueChangeDebounced(e.target.value, false, false)}
           onBlur={onInputFocusOut}
         />
       </div>
@@ -106,14 +109,16 @@ export default function DoubleRange({
             min={minValue}
             max={maxValue}
             value={getValues().min}
-            onChange={(e) => onValueChange(e, true, true)}
+            onChange={(e) => onValueChangeDebounced(e.target.value, true, true)}
           />
           <input
             type="range"
             min={minValue}
             max={maxValue}
             value={getValues().max}
-            onChange={(e) => onValueChange(e, true, false)}
+            onChange={(e) =>
+              onValueChangeDebounced(e.target.value, true, false)
+            }
           />
         </div>
       </div>
