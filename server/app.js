@@ -32,7 +32,7 @@ if (!isProduction) mongoose.set("debug", true);
 
 app.use((err, req, res, next) => {
   console.error("Error in routing:\n", err);
-  res.status(422).json({ error: err });
+  res.status(500).json({ error: err });
 });
 
 app.listen(PORT, () => {
