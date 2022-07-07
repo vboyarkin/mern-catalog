@@ -1,10 +1,10 @@
 import path from "path";
 import logger from "morgan";
-import DBG from "debug";
-
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import routes from "./routes/index.js";
+
 const app = express();
 const PORT = process.env.BACKEND_PORT;
 const isProduction = process.env.NODE_ENV === "production";
@@ -27,10 +27,6 @@ mongoose.connect(process.env.MONGO_URI, {
   user: process.env.MONGO_USERNAME,
   pass: process.env.MONGO_PASSWORD,
 });
-
-import Item from "./models/item.js";
-
-import routes from "./routes/index.js";
 
 if (!isProduction) mongoose.set("debug", true);
 

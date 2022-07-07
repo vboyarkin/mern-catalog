@@ -1,7 +1,6 @@
+import React, { useState } from "react";
 import classes from "./CheckboxListSelector.module.sass";
 import TextField from "../TextField";
-
-import React, { useState } from "react";
 
 /**
  * @param {Object} props

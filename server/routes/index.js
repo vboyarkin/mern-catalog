@@ -1,6 +1,6 @@
 import { Router } from "express";
-const router = Router();
 import api from "./api.js";
+const router = Router();
 
 router.use("/api", api);
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-const Item = mongoose.model("Item");
 import { Router } from "express";
+const Item = mongoose.model("Item");
 const router = Router();
 
 router.use("/products", async (req, res, next) => {
@@ -86,7 +86,7 @@ router.use("/filters", async (req, res, next) => {
     result = result[0];
 
     for (const prop of ["category", "discount"]) {
-      result[prop] = result[prop].map(x => ({
+      result[prop] = result[prop].map((x) => ({
         option: x._id,
         id: x.id,
       }));
