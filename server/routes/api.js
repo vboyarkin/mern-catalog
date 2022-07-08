@@ -1,13 +1,15 @@
-import mongoose from "mongoose";
 import { Router } from "express";
-const Item = mongoose.model("Item");
+import Item from "../models/item.js";
 const router = Router();
 
 router.use("/products", async (req, res, next) => {
   try {
-    const limit = req.query.limit || 20;
+    const { limit = 20, minPrice, maxPrice } = req.query || {};
     let skip = (req.query.page - 1) * limit;
-    if (!skip || skip < 0) skip = 0;
+    if (!skip || skip < 0) {
+      skip = 0;
+    }
+
     const query = {};
 
     for (const prop of ["category", "discount"]) {
@@ -16,11 +18,11 @@ router.use("/products", async (req, res, next) => {
       }
     }
 
-    if (req.query.minPrice || req.query.maxPrice) {
+    if (minPrice || maxPrice) {
       query.price = {};
 
-      if (req.query.minPrice) query.price.$gte = req.query.minPrice;
-      if (req.query.maxPrice) query.price.$lte = req.query.maxPrice;
+      if (minPrice) query.price.$gte = minPrice;
+      if (maxPrice) query.price.$lte = maxPrice;
     }
 
     console.log("req.query :>> ", req.query);
