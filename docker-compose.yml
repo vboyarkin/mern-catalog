@@ -21,13 +21,14 @@ services:
     build:
       context: .
       dockerfile: ./server/Dockerfile
+      args:
+        - REACT_APP_IS_DEV=true
+        - REACT_APP_API_URL=http://localhost:3355/api/
     environment:
       - BACKEND_PORT=3355
       - DEBUG="catalog:*"
       - MONGO_USERNAME=root
       - MONGO_PASSWORD=test
-      - REACT_APP_IS_DEV=true
-      - REACT_APP_API_URL=http://localhost:3355/api/
     ports:
       - "3355:3355"
     container_name: catalog-backend
