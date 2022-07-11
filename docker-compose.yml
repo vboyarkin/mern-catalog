@@ -23,14 +23,14 @@ services:
       dockerfile: ./server/Dockerfile
       args:
         - REACT_APP_IS_DEV=true
-        - REACT_APP_API_URL=http://localhost:3355/api/
+        - REACT_APP_API_URL=http://localhost:3000/api/
     environment:
-      - BACKEND_PORT=3355
+      - BACKEND_PORT=3000
       - DEBUG="catalog:*"
       - MONGO_USERNAME=root
       - MONGO_PASSWORD=test
     ports:
-      - "3355:3355"
+      - "3000:3000"
     container_name: catalog-backend
     depends_on:
       - catalog-mongo
