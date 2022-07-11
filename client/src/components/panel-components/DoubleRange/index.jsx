@@ -91,6 +91,7 @@ export default function DoubleRange({
       <div className={classes.textContainer}>
         <input
           type="number"
+          step="any"
           placeholder={minValue}
           value={getValues().min}
           onChange={(e) => onValueChangeDebounced(e.target.value, false, true)}
@@ -99,6 +100,7 @@ export default function DoubleRange({
         <span className={classes.dash}>—</span>
         <input
           type="number"
+          step="any"
           placeholder={maxValue}
           value={getValues().max}
           onChange={(e) => onValueChangeDebounced(e.target.value, false, false)}
