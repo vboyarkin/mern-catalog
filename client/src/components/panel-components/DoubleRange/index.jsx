@@ -54,7 +54,11 @@ export default function DoubleRange({
     onRangeChange({ min: left, max: right });
   };
 
-  const onValueChangeDebounced = useDebouncedCallback(onValueChange, 50);
+  const onValueChangeDebounced = useDebouncedCallback(onValueChange, 50, true, [
+    getValues().max,
+    false,
+    false,
+  ]);
 
   const onInputFocusOut = (e) => {
     e.target.value = sanitizeNumber(e.target.value, true);

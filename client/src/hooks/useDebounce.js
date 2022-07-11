@@ -35,7 +35,7 @@ export function useDebouncedCallback(
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (!skipFirstRender || !isFirstRender) {
+      if (!skipFirstRender || !isFirstRender.current) {
         callback(...args);
       }
     }, delay);
@@ -59,4 +59,3 @@ export function useIsFirstRender() {
 
   return isFirstRender;
 }
-
