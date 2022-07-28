@@ -23,7 +23,7 @@ services:
       dockerfile: ./server/Dockerfile
       args:
         - REACT_APP_IS_DEV=true
-        - REACT_APP_API_URL=http://localhost:3000/api/
+        - REACT_APP_API_URL=${REACT_APP_API_URL}
     environment:
       - BACKEND_PORT=3000
       - DEBUG="catalog:*"
