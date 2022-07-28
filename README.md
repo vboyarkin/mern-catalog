@@ -15,7 +15,13 @@ Then go to mongodb and check out README.md
 ## Rebuild docker images
 
 ```
-docker compose build --no-cache
+REACT_APP_API_URL="/api/" docker compose build --no-cache
+```
+
+Or
+
+```
+REACT_APP_API_URL="http://localhost:3000/api/" docker compose build --no-cache
 ```
 
 ## Export data from mongo
